@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
+
 const initialFriends = [
   {
     id: 118836,
@@ -21,16 +23,31 @@ const initialFriends = [
   },
 ];
 
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 function App() {
+  const [showAddFriend, setShowAddFriend] = useState(false);
+
+  function handleShowAddFriend() {
+    setShowAddFriend((show) => !show);
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
         <FriendList />
-        <FormAddFriend/>
-        <Button>Add Friend</Button>
-        
+        {showAddFriend && <FormAddFriend />}
+        <Button onClick={handleShowAddFriend}>
+          {showAddFriend ? "Close" : "AddFriend"}
+        </Button>
       </div>
-      <FormSplitBill/>
+      <FormSplitBill />
     </div>
   );
 }
@@ -72,38 +89,36 @@ function Friend({ friend, key }) {
   );
 }
 
-function Button({children}){
-  return <button className="button">{children}</button>
-}
-
-function FormAddFriend(){
-  return(
+function FormAddFriend() {
+  return (
     <form className="form-add-friend">
       <label> 👨‍👩‍👧‍👦 Friend Name</label>
       <input type="text" />
       <label>📷Image URL</label>
       <input type="text" />
-     <Button>Add Friend</Button>
+      <Button>Add Friend</Button>
     </form>
-  )
+  );
 }
 
-function FormSplitBill(){
-  return <form  className="form-split-bill">
-    <h2>Split a bill with X </h2>
-    <label>💰 Split Bill</label>
-    <input type="text" />
+function FormSplitBill() {
+  return (
+    <form className="form-split-bill">
+      <h2>Split a bill with X </h2>
+      <label>💰 Split Bill</label>
+      <input type="text" />
 
-    <label>Your expense 🫰</label>
-    <input type="text" />
-   
-    <label>🧑‍🤝‍🧑 X's expense </label>
-    <input type="text" disabled />
+      <label>Your expense 🫰</label>
+      <input type="text" />
 
-    <label>🤑 Who is paying bill</label>
-    <select>
-      <option className="user">You</option>
-      <option className="friend">X</option>
-    </select>
-  </form>
+      <label>🧑‍🤝‍🧑 X's expense </label>
+      <input type="text" disabled />
+
+      <label>🤑 Who is paying bill</label>
+      <select>
+        <option className="user">You</option>
+        <option className="friend">X</option>
+      </select>
+    </form>
+  );
 }
