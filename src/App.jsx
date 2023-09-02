@@ -28,7 +28,9 @@ function App() {
         <FriendList />
         <FormAddFriend/>
         <Button>Add Friend</Button>
+        
       </div>
+      <FormSplitBill/>
     </div>
   );
 }
@@ -79,10 +81,29 @@ function FormAddFriend(){
     <form className="form-add-friend">
       <label> 👨‍👩‍👧‍👦 Friend Name</label>
       <input type="text" />
-      <label> 😬Image URL</label>
+      <label>📷Image URL</label>
       <input type="text" />
      <Button>Add Friend</Button>
     </form>
   )
 }
 
+function FormSplitBill(){
+  return <form  className="form-split-bill">
+    <h2>Split a bill with X </h2>
+    <label>💰 Split Bill</label>
+    <input type="text" />
+
+    <label>Your expense 🫰</label>
+    <input type="text" />
+   
+    <label>🧑‍🤝‍🧑 X's expense </label>
+    <input type="text" disabled />
+
+    <label>🤑 Who is paying bill</label>
+    <select>
+      <option className="user">You</option>
+      <option className="friend">X</option>
+    </select>
+  </form>
+}
